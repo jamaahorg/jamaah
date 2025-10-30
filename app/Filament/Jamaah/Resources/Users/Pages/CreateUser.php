@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\UserResource\Pages;
+namespace App\Filament\Jamaah\Resources\Users\Pages;
 
-use App\Filament\Jamaah\Resources\UserResource;
+use App\Filament\Jamaah\Resources\Users\UserResource;
 use App\Models\User;
 use Filament\Actions;
 use Filament\Facades\Filament;

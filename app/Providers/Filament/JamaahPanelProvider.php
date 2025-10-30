@@ -54,7 +54,6 @@ class JamaahPanelProvider extends PanelProvider
             // Plugins
             ->plugin(FilamentSocialitePlugin::make()->providers([
                 Provider::make("google")
-                    ->icon('fab-google')
                     ->label("google")
             ])->slug('jamaah')->registration(true))
 
@@ -70,7 +69,7 @@ class JamaahPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                UserMiddleware::class
+                // UserMiddleware::class
             ])
             ->tenantMiddleware([
                 SyncSpatiePermissionsWithFilamentTenants::class,

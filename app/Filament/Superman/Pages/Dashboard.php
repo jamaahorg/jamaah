@@ -7,8 +7,8 @@ use Filament\Pages\Dashboard as FilamentDashboard;
 
 class Dashboard extends FilamentDashboard
 {
-    protected static ?string $navigationIcon = 'heroicon-o-home';
-    protected static string $view = 'filament.superman.pages.dashboard';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-home';
+    protected string $view = 'filament.superman.pages.dashboard';
 
     protected function getHeaderWidgets(): array
     {

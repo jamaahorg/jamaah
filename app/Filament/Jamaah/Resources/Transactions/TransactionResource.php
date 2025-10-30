@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources;
+namespace App\Filament\Jamaah\Resources\Transactions;
 
+use Filament\Schemas\Schema;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Jamaah\Resources\Transactions\Pages\ListTransactions;
+use App\Filament\Jamaah\Resources\Transactions\Pages\CreateTransaction;
+use App\Filament\Jamaah\Resources\Transactions\Pages\EditTransaction;
 use App\Filament\Jamaah\Resources\TransactionResource\Pages;
 use App\Filament\Jamaah\Resources\TransactionResource\RelationManagers;
 use App\Models\Transaction;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -17,13 +23,13 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
-    protected static ?string $navigationGroup = 'Transactions';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-banknotes';
+    protected static string | \UnitEnum | null $navigationGroup = 'Transactions';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 //
             ]);
     }
@@ -37,12 +43,12 @@ class TransactionResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -57,9 +63,9 @@ class TransactionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTransactions::route('/'),
-            'create' => Pages\CreateTransaction::route('/create'),
-            'edit' => Pages\EditTransaction::route('/{record}/edit'),
+            'index' => ListTransactions::route('/'),
+            'create' => CreateTransaction::route('/create'),
+            'edit' => EditTransaction::route('/{record}/edit'),
         ];
     }
 }

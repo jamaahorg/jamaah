@@ -1,12 +1,19 @@
 <?php
 
-namespace App\Filament\Superman\Resources;
+namespace App\Filament\Superman\Resources\Users;
 
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\DeleteAction;
+use App\Filament\Superman\Resources\Users\Pages\ListUsers;
+use App\Filament\Superman\Resources\Users\Pages\CreateUsers;
+use App\Filament\Superman\Resources\Users\Pages\EditUsers;
 use App\Filament\Superman\Resources\UsersResource\Pages;
 use App\Filament\Superman\Resources\UsersResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -16,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class UsersResource extends Resource
 {
     protected static ?string $model = User::class;
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-user';
 
     public static function getNavigationLabel(): string
     {
@@ -28,14 +35,14 @@ class UsersResource extends Resource
         return __('common.users');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->label(__('common.name'))
                     ->required(),
-                Forms\Components\Select::make('roles')
+                Select::make('roles')
                     ->label(__('common.role'))
                     ->relationship('roles', 'name')
                     ->selectablePlaceholder(false)
@@ -47,15 +54,15 @@ class UsersResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label(__('common.name')),
-                Tables\Columns\TextColumn::make('email')->label(__('common.email')),
-                Tables\Columns\TextColumn::make('created_at')->label(__('common.register_date')),
+                TextColumn::make('name')->label(__('common.name')),
+                TextColumn::make('email')->label(__('common.email')),
+                TextColumn::make('created_at')->label(__('common.register_date')),
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                DeleteAction::make(),
             ]);
     }
 
@@ -69,9 +76,9 @@ class UsersResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUsers::route('/create'),
-            'edit' => Pages\EditUsers::route('/{record}/edit'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUsers::route('/create'),
+            'edit' => EditUsers::route('/{record}/edit'),
         ];
     }
 }

@@ -2,24 +2,24 @@
 
 namespace App\Filament\Jamaah\Pages;
 
+use Filament\Schemas\Schema;
 use App\Models\Jamaah;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Pages\Tenancy\EditTenantProfile;
 
 class JamaahProfile extends EditTenantProfile
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-document-text';
 
     public static function getLabel(): string
     {
         return __("common.jamaah_profile");
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('name'),
                 TextInput::make('website')
                     ->suffix('.jamaah.com')

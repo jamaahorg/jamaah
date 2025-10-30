@@ -1,12 +1,20 @@
 <?php
 
-namespace App\Filament\Superman\Resources;
+namespace App\Filament\Superman\Resources\Jamaahs;
 
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Actions\DeleteAction;
+use App\Filament\Superman\Resources\Jamaahs\Pages\ListJamaahs;
+use App\Filament\Superman\Resources\Jamaahs\Pages\CreateJamaah;
+use App\Filament\Superman\Resources\Jamaahs\Pages\EditJamaah;
 use App\Filament\Superman\Resources\JamaahResource\Pages;
 use App\Filament\Superman\Resources\JamaahResource\RelationManagers;
 use App\Models\Jamaah;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters;
@@ -18,25 +26,25 @@ class JamaahResource extends Resource
 {
     protected static ?string $model = Jamaah::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationLabel = 'Jamaah';
     protected static ?string $pluralLabel = 'Jamaah';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->label(__('common.name'))
                     ->required(),
-                Forms\Components\TextInput::make('website')
+                TextInput::make('website')
                     ->label(__('common.website'))
                     ->suffix('.jamaah.com')
                     ->prefixIcon('heroicon-m-globe-alt')
                     ->required()
                     ->alphaDash()
                     ->unique(table: Jamaah::class, column: "website", ignoreRecord: true),
-                Forms\Components\Select::make("type")
+                Select::make("type")
                     ->label(__('common.type'))
                     ->options([
                         'masjid' => 'Masjid',
@@ -52,20 +60,20 @@ class JamaahResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label(__('common.name')),
-                Tables\Columns\TextColumn::make('website')->label(__('common.website')),
-                Tables\Columns\TextColumn::make('type')->label(__('common.type')),
+                TextColumn::make('name')->label(__('common.name')),
+                TextColumn::make('website')->label(__('common.website')),
+                TextColumn::make('type')->label(__('common.type')),
             ])
             ->filters([
-                Filters\SelectFilter::make('type')
+                SelectFilter::make('type')
                     ->label(__('common.type'))
                     ->options([
                         'masjid' => 'Masjid',
                         'majelis' => 'Majelis',
                     ])
             ])
-            ->actions([
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                DeleteAction::make(),
             ]);
     }
 
@@ -79,9 +87,9 @@ class JamaahResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJamaahs::route('/'),
-            'create' => Pages\CreateJamaah::route('/create'),
-            'edit' => Pages\EditJamaah::route('/{record}/edit'),
+            'index' => ListJamaahs::route('/'),
+            'create' => CreateJamaah::route('/create'),
+            'edit' => EditJamaah::route('/{record}/edit'),
         ];
     }
 }

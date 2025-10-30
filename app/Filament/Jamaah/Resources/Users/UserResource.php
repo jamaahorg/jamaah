@@ -1,7 +1,12 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources;
+namespace App\Filament\Jamaah\Resources\Users;
 
+use Filament\Schemas\Schema;
+use Filament\Actions\DeleteAction;
+use App\Filament\Jamaah\Resources\Users\Pages\ListUsers;
+use App\Filament\Jamaah\Resources\Users\Pages\CreateUser;
+use App\Filament\Jamaah\Resources\Users\Pages\EditUser;
 use App\Filament\Jamaah\Resources\UserResource\Pages;
 use App\Filament\Jamaah\Resources\UserResource\RelationManagers;
 use App\Models\Role;
@@ -9,11 +14,9 @@ use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
@@ -25,7 +28,7 @@ use Illuminate\Support\Facades\DB;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationLabel(): string
     {
@@ -37,10 +40,10 @@ class UserResource extends Resource
         return __('common.users');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Select::make("user_id")
                     ->label(__('common.name'))
                     ->options(
@@ -82,7 +85,7 @@ class UserResource extends Resource
                     ->label(__('common.role'))
                     ->view("tables.columns.select-role")
             ])
-            ->actions([
+            ->recordActions([
                 DeleteAction::make()
                     ->before(function (DeleteAction $action, User $record) {
                         DB::transaction(function () use ($record) {
@@ -102,7 +105,7 @@ class UserResource extends Resource
                     }),
             ])
             ->recordUrl(null)
-            ->bulkActions([]);
+            ->toolbarActions([]);
     }
 
     public static function getRelations(): array
@@ -115,9 +118,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }

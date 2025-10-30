@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\TransactionCategoryResource\Pages;
+namespace App\Filament\Jamaah\Resources\TransactionCategories\Pages;
 
-use App\Filament\Jamaah\Resources\TransactionCategoryResource;
+use Filament\Actions\DeleteAction;
+use App\Filament\Jamaah\Resources\TransactionCategories\TransactionCategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -13,7 +14,7 @@ class EditTransactionCategory extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Superman\Resources\JamaahResource\Pages;
+namespace App\Filament\Superman\Resources\Jamaahs\Pages;
 
-use App\Filament\Superman\Resources\JamaahResource;
+use App\Filament\Superman\Resources\Jamaahs\JamaahResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

@@ -12,10 +12,10 @@ class UserMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Closure(Request):Response $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return (Auth::user()?->is_superman) ?  redirect(to: route("filament.superman.pages.dashboard")) : $next($request);
+        return (Auth::user()?->isSuperAdmin()) ?  redirect(to: route("filament.superman.pages.dashboard")) : $next($request);
     }
 }

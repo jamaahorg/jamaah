@@ -1,14 +1,21 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources;
+namespace App\Filament\Jamaah\Resources\Majelis;
 
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use App\Filament\Jamaah\Resources\Majelis\Pages\ListMajelis;
+use App\Filament\Jamaah\Resources\Majelis\Pages\CreateMajelis;
+use App\Filament\Jamaah\Resources\Majelis\Pages\EditMajelis;
 use App\Filament\Jamaah\Resources\MajelisResource\Pages;
 use App\Filament\Jamaah\Resources\MajelisResource\RelationManagers;
 use App\Models\Jamaah;
 use App\Models\Majelis;
 use Filament\Facades\Filament;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -21,7 +28,7 @@ class MajelisResource extends Resource
     protected static ?string $model = Jamaah::class;
     protected static ?string $tenantOwnershipRelationshipName = 'parent';
     protected static ?string $tenantRelationshipName = 'children';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Majelis';
     protected static ?string $label = 'Majelis';
 
@@ -37,14 +44,14 @@ class MajelisResource extends Resource
         return Filament::getTenant()->type == "masjid";
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->label(__('common.name'))
                     ->required(),
-                Forms\Components\TextInput::make('website')
+                TextInput::make('website')
                     ->label(__('common.website'))
                     ->suffix('.jamaah.com')
                     ->prefixIcon('heroicon-m-globe-alt')
@@ -60,13 +67,13 @@ class MajelisResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->label(__('common.name')),
-                Tables\Columns\TextColumn::make('website')->label(__('common.website')),
-                Tables\Columns\TextColumn::make('type')->label(__('common.type')),
+                TextColumn::make('name')->label(__('common.name')),
+                TextColumn::make('website')->label(__('common.website')),
+                TextColumn::make('type')->label(__('common.type')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ]);
     }
 
@@ -88,9 +95,9 @@ class MajelisResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMajelis::route('/'),
-            'create' => Pages\CreateMajelis::route('/create'),
-            'edit' => Pages\EditMajelis::route('/{record}/edit'),
+            'index' => ListMajelis::route('/'),
+            'create' => CreateMajelis::route('/create'),
+            'edit' => EditMajelis::route('/{record}/edit'),
         ];
     }
 }

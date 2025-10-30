@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Superman\Resources\UsersResource\Pages;
+namespace App\Filament\Superman\Resources\Users\Pages;
 
-use App\Filament\Superman\Resources\UsersResource;
+use Filament\Actions\CreateAction;
+use App\Filament\Superman\Resources\Users\UsersResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -13,7 +14,7 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

@@ -48,7 +48,6 @@ class SupermanPanelProvider extends PanelProvider
             ->plugin(FilamentSocialitePlugin::make()
                 ->providers([
                     Provider::make("google")
-                        ->icon('fab-google')
                         ->label("google")
                 ])
                 ->slug('superman'))
@@ -65,7 +64,7 @@ class SupermanPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                SupermanMiddleware::class
+                // SupermanMiddleware::class
             ])
             ->authMiddleware([
                 Authenticate::class,

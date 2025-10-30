@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\UserResource\Pages;
+namespace App\Filament\Jamaah\Resources\Users\Pages;
 
-use App\Filament\Jamaah\Resources\UserResource;
+use Filament\Actions\CreateAction;
+use App\Filament\Jamaah\Resources\Users\UserResource;
 use App\Models\User;
 use Filament\Actions;
 use Filament\Notifications\Notification;
@@ -16,7 +17,7 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 

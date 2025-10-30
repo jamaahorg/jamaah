@@ -2,10 +2,10 @@
 
 namespace App\Filament\Jamaah\Pages;
 
+use Filament\Schemas\Schema;
 use App\Models\Jamaah;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,10 +17,10 @@ class JamaahRegistration extends RegisterTenant
         return __("common.register_jamaah");
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('name')->required(),
                 TextInput::make('website')
                     ->suffix('.jamaah.com')

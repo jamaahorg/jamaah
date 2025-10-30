@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Superman\Resources\JamaahResource\Pages;
+namespace App\Filament\Superman\Resources\Jamaahs\Pages;
 
-use App\Filament\Superman\Resources\JamaahResource;
+use Filament\Actions\CreateAction;
+use App\Filament\Superman\Resources\Jamaahs\JamaahResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -13,7 +14,7 @@ class ListJamaahs extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

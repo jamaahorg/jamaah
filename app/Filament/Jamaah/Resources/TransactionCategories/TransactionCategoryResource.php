@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources;
+namespace App\Filament\Jamaah\Resources\TransactionCategories;
 
+use Filament\Schemas\Schema;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Jamaah\Resources\TransactionCategories\Pages\ListTransactionCategories;
+use App\Filament\Jamaah\Resources\TransactionCategories\Pages\CreateTransactionCategory;
+use App\Filament\Jamaah\Resources\TransactionCategories\Pages\EditTransactionCategory;
 use App\Filament\Jamaah\Resources\TransactionCategoryResource\Pages;
 use App\Filament\Jamaah\Resources\TransactionCategoryResource\RelationManagers;
 use App\Models\TransactionCategory;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -17,13 +23,13 @@ class TransactionCategoryResource extends Resource
 {
     protected static ?string $model = TransactionCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
-    protected static ?string $navigationGroup = 'Transactions';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-squares-2x2';
+    protected static string | \UnitEnum | null $navigationGroup = 'Transactions';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 //
             ]);
     }
@@ -37,12 +43,12 @@ class TransactionCategoryResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -57,9 +63,9 @@ class TransactionCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTransactionCategories::route('/'),
-            'create' => Pages\CreateTransactionCategory::route('/create'),
-            'edit' => Pages\EditTransactionCategory::route('/{record}/edit'),
+            'index' => ListTransactionCategories::route('/'),
+            'create' => CreateTransactionCategory::route('/create'),
+            'edit' => EditTransactionCategory::route('/{record}/edit'),
         ];
     }
 }

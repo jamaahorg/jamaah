@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\TransactionResource\Pages;
+namespace App\Filament\Jamaah\Resources\Transactions\Pages;
 
-use App\Filament\Jamaah\Resources\TransactionResource;
+use Filament\Actions\DeleteAction;
+use App\Filament\Jamaah\Resources\Transactions\TransactionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -13,7 +14,7 @@ class EditTransaction extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

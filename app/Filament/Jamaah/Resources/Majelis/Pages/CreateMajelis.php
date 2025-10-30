@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\MajelisResource\Pages;
+namespace App\Filament\Jamaah\Resources\Majelis\Pages;
 
-use App\Filament\Jamaah\Resources\MajelisResource;
+use App\Filament\Jamaah\Resources\Majelis\MajelisResource;
 use Filament\Actions;
 use Filament\Facades\Filament;
 use Filament\Resources\Pages\CreateRecord;

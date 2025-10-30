@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Superman\Resources\UsersResource\Pages;
+namespace App\Filament\Superman\Resources\Users\Pages;
 
-use App\Filament\Superman\Resources\UsersResource;
+use App\Filament\Superman\Resources\Users\UsersResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

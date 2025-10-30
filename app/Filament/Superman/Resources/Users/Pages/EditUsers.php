@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Superman\Resources\UsersResource\Pages;
+namespace App\Filament\Superman\Resources\Users\Pages;
 
-use App\Filament\Superman\Resources\UsersResource;
+use Filament\Actions\DeleteAction;
+use App\Filament\Superman\Resources\Users\UsersResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -13,7 +14,7 @@ class EditUsers extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

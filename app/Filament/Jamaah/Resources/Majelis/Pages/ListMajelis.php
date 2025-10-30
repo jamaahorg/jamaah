@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\MajelisResource\Pages;
+namespace App\Filament\Jamaah\Resources\Majelis\Pages;
 
-use App\Filament\Jamaah\Resources\MajelisResource;
+use Filament\Actions\CreateAction;
+use App\Filament\Jamaah\Resources\Majelis\MajelisResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -13,7 +14,7 @@ class ListMajelis extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

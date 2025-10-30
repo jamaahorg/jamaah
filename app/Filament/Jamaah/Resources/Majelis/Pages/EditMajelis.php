@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\MajelisResource\Pages;
+namespace App\Filament\Jamaah\Resources\Majelis\Pages;
 
-use App\Filament\Jamaah\Resources\MajelisResource;
+use Filament\Actions\DeleteAction;
+use App\Filament\Jamaah\Resources\Majelis\MajelisResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -13,7 +14,7 @@ class EditMajelis extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 

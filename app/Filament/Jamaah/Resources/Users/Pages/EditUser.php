@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Jamaah\Resources\UserResource\Pages;
+namespace App\Filament\Jamaah\Resources\Users\Pages;
 
-use App\Filament\Jamaah\Resources\UserResource;
+use Filament\Actions\DeleteAction;
+use App\Filament\Jamaah\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -13,7 +14,7 @@ class EditUser extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }
