@@ -12,10 +12,10 @@ class SupermanMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Closure(Request):Response $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return (Auth::user()->is_superman) ? $next($request) : redirect(to: route("filament.jamaah.auth.login"));
+        return (Auth::user()?->isSuperAdmin()) ? $next($request) : redirect(to: route("filament.jamaah.auth.login"));
     }
 }
